@@ -1,0 +1,51 @@
+<div class="row mb-2" *ngFor="let flavors of flavors">
+  <div class="col-md-6">
+    <div
+      class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+    >
+      <div
+        class="col p-4 d-flex flex-column position-static chosen"
+        [class.selected]="flavors === selectedFlavors"
+      >
+        <strong class="d-inline-block mb-2 text-primary">{{
+          flavors.id
+        }}</strong>
+        <h3 class="mb-0">{{ flavors.name }}</h3>
+        <div
+          class="mb-1 text-muted"
+          [innerHTML]="'Rating: ' + star(flavors.rating)"
+        ></div>
+        <p class="card-text mb-auto">
+          {{ flavors.description }}
+        </p>
+        <div (click)="onSelect(flavors)">
+          <button type="button" class="btn btn-info">Edit</button>
+        </div>
+      </div>
+      <div class="col-auto d-none d-lg-block">
+        <img src="{{ flavors.img }}" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="selectedFlavors" class="col">
+  <div class="card mb-4 rounded-3 shadow-sm">
+    <div class="card-header py-3">
+      <h4 class="my-0 fw-normal">Edit Details</h4>
+    </div>
+    <div class="card-body">
+      <h1 class="card-title pricing-card-title">{{ selectedFlavors.name }}</h1>
+      <div class="custom-select" style="width: 200px">
+        Rating:
+        <select [(ngModel)]="selectedFlavors.rating">
+          <option value="1">★</option>
+          <option value="2">★★</option>
+          <option value="3">★★★</option>
+          <option value="4">★★★★</option>
+          <option value="5">★★★★★</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
